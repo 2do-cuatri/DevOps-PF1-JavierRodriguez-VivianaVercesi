@@ -3,9 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica Formativa 1</title>
+    <title>Ingreso de usuarios</title>
 </head>
 <body>
+    <h1>Registro de usuarios</h1>
     
+    <form action="" id="userForm">
+        <input type="text" name="user" placeholder="Usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Enviar</button>
+    </form>
+    
+    <script>
+        document.getElementById("userForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const datos = {
+                username: e.target.user.value,
+                password: e.target.password.value
+            };
+        
+            fetch('backend.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(datos)
+            })
+            .then(response => response.json())
+            .then(data => alert(data.status));
+        });
+        </script>
+
 </body>
 </html>
